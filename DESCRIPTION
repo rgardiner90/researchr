@@ -1,0 +1,28 @@
+Package: researchr
+Type: Package
+Title: Automating Basic Analyses for Social Science Researchers
+Version: 0.0.0.9001
+Authors@R: 
+    person(given = "Richard",
+           family = "Gardiner",
+           role = c("aut", "cre"),
+           email = "rgardiner90@gmail.com")
+Description: Functions to perform checks for missing data problem, testing of 
+    assumptions for models, explain results, and make predictions. Takes ideas 
+    primarily developed 	when dealing with real research problems encountered 
+    in day-to-day research projects. Particularly useful when trying to scale
+    projects that still require careful attention.
+License: GPL-3
+Imports:
+   tidyverse,
+   car (>= 3.0-3),
+   moments (>= 0.14)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports: 
+  ggplot2, 
+  dplyr, 
+  tidyr, 
+  car, 
+  moments
