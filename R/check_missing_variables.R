@@ -12,7 +12,7 @@
 #' informing you that there is no missing data. Otherwise a graph will
 #' appear showing the variable one the y axis and the percent missing on the x-axis.
 #'
-#' @export
+#' @export check_missing_variables()
 #'
 #' @examples
 #' check_missing_variables(cars) # no missing data
