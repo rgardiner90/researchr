@@ -2,9 +2,7 @@
 % Please edit documentation in R/check_missing_variables.R
 \name{check_missing_variables}
 \alias{check_missing_variables}
-\title{Checking a dataset for missing observations across variables
-This function returns a graph that shows variable missingness across the
-entire dataset.}
+\title{Checking a dataset for missing observations across variables}
 \usage{
 check_missing_variables(dataset)
 }
@@ -17,7 +15,6 @@ informing you that there is no missing data. Otherwise a graph will
 appear showing the variable one the y axis and the percent missing on the x-axis.
 }
 \description{
-Checking a dataset for missing observations across variables
 This function returns a graph that shows variable missingness across the
 entire dataset.
 }
