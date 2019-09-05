@@ -5,14 +5,13 @@
 #'
 #' @param dataset A vector, matrix, data frame, or tibble.
 #'
-#' @import dplyr
-#' @import ggplot2
+#' @importFrom magrittr %>%
 #'
 #' @return If there is no missing data the function will return a string
 #' informing you that there is no missing data. Otherwise a graph will
 #' appear showing the variable one the y axis and the percent missing on the x-axis.
 #'
-#' @export check_missing_variables()
+#' @export
 #'
 #' @examples
 #' check_missing_variables(cars) # no missing data
@@ -39,11 +38,11 @@ check_missing_variables <- function(dataset) {
       dplyr::select(-V1) %>%
       dplyr::filter(percent_missing != 0) %>%
       dplyr::mutate(columns = reorder(columns, percent_missing)) %>%
-      ggplot(aes(factor(columns), percent_missing, fill = percent_missing)) +
-      geom_col()  +
-      labs(x = "Original Variables", y ="Percentage of Observations that are Missing",
+      ggplot::ggplot(aes(factor(columns), percent_missing, fill = percent_missing)) +
+      ggplot::geom_col()  +
+      ggplot::labs(x = "Original Variables", y ="Percentage of Observations that are Missing",
            fill = "Percent Missing") +
-      coord_flip() +
-      scale_fill_gradient2(limits = c(0, 100), low = "light blue", high = "dark red", mid = "light blue")
+      ggplot::coord_flip() +
+      ggplot::scale_fill_gradient2(limits = c(0, 100), low = "light blue", high = "dark red", mid = "light blue")
   }
 }

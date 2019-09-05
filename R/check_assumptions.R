@@ -16,6 +16,8 @@
 #' variable.  Currently, it is unable to properly evaluate the influence of a
 #' categorical variable.
 #'
+#' @export
+#'
 #' @examples
 #' model <- lm(dist ~ speed , data = cars) # running a model
 #' check_assumptions(model)
