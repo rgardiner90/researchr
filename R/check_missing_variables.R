@@ -38,11 +38,11 @@ check_missing_variables <- function(dataset) {
       dplyr::select(-V1) %>%
       dplyr::filter(percent_missing != 0) %>%
       dplyr::mutate(columns = reorder(columns, percent_missing)) %>%
-      ggplot::ggplot(aes(factor(columns), percent_missing, fill = percent_missing)) +
-      ggplot::geom_col()  +
-      ggplot::labs(x = "Original Variables", y ="Percentage of Observations that are Missing",
+      ggplot2::ggplot(ggplot2::aes(factor(columns), percent_missing, fill = percent_missing)) +
+      ggplot2::geom_col()  +
+      ggplot2::labs(x = "Original Variables", y ="Percentage of Observations that are Missing",
            fill = "Percent Missing") +
-      ggplot::coord_flip() +
-      ggplot::scale_fill_gradient2(limits = c(0, 100), low = "light blue", high = "dark red", mid = "light blue")
+      ggplot2::coord_flip() +
+      ggplot2::scale_fill_gradient2(limits = c(0, 100), low = "light blue", high = "dark red", mid = "light blue")
   }
 }
