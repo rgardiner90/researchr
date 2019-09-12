@@ -2,11 +2,7 @@
 % Please edit documentation in R/check_assumptions.R
 \name{check_assumptions}
 \alias{check_assumptions}
-\title{Checking the Gauss-Markov Assumptions
-This function taks in an OLS model and returns a data frame of the
-most common assumptions used to test a model. Used as a starting
-point for testing the assumptions.  The results offer suggestions
-about which assumptions deserve a closer examination.}
+\title{Checking the Gauss-Markov Assumptions}
 \usage{
 check_assumptions(model_name)
 }
@@ -24,7 +20,6 @@ variable.  Currently, it is unable to properly evaluate the influence of a
 categorical variable.
 }
 \description{
-Checking the Gauss-Markov Assumptions
 This function taks in an OLS model and returns a data frame of the
 most common assumptions used to test a model. Used as a starting
 point for testing the assumptions.  The results offer suggestions

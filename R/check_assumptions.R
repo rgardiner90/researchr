@@ -1,4 +1,5 @@
 #' Checking the Gauss-Markov Assumptions
+#'
 #' This function taks in an OLS model and returns a data frame of the
 #' most common assumptions used to test a model. Used as a starting
 #' point for testing the assumptions.  The results offer suggestions
