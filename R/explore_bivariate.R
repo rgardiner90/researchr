@@ -8,8 +8,10 @@
 #' @param dependent A string character of the dependent variable
 #' @param independent A string vector of the different independent variables to test
 #' @param p_value The significance threshold for a table output (defaults to 0.05). Graph is
-#' fixed at 95% confidence intervals
+#' fixed at 95 percent confidence intervals
 #' @param type Specifies the type of output request.  either 'graph' or 'table'
+#'
+#' @importFrom magrittr %>%
 #'
 #' @export
 #'
