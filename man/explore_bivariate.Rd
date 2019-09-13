@@ -5,7 +5,7 @@
 \title{Exploring biviate regression results of a dataframe}
 \usage{
 explore_bivariate(data, dependent, independent, p_value = 0.05,
-  type = "graph")
+  type = "graph", model_type = "ols")
 }
 \arguments{
 \item{data}{A matrix, data frame, or tibble.}
@@ -18,6 +18,8 @@ explore_bivariate(data, dependent, independent, p_value = 0.05,
 fixed at 95 percent confidence intervals}
 
 \item{type}{Specifies the type of output request.  either 'graph' or 'table'}
+
+\item{model_type}{Specificies whether you have an OLS or logit model.}
 }
 \description{
 This function returns either a graph or table of bivariate regression results for a dataset.
@@ -29,4 +31,5 @@ explore_bivariate(gapminder::gapminder, "lifeExp", c("gdpPercap", "continent"), 
 explore_bivariate(gapminder::gapminder, "lifeExp", c("gdpPercap", "continent"))
 explore_bivariate(mtcars, "mpg", c("cyl", "disp", "hp", "drat"), p_value = 0.00001)
 explore_bivariate(mtcars, names(mtcars)[1], names(mtcars)[-1])
+explore_bivariate(titanic::titanic_train, "Survived", c("Sex", "Age"), model_type = "logit")
 }

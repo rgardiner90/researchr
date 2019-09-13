@@ -10,6 +10,7 @@
 #' @param p_value The significance threshold for a table output (defaults to 0.05). Graph is
 #' fixed at 95 percent confidence intervals
 #' @param type Specifies the type of output request.  either 'graph' or 'table'
+#' @param model_type Specificies whether you have an OLS or logit model.
 #'
 #' @importFrom magrittr %>%
 #'
@@ -20,7 +21,9 @@
 #' explore_bivariate(gapminder::gapminder, "lifeExp", c("gdpPercap", "continent"))
 #' explore_bivariate(mtcars, "mpg", c("cyl", "disp", "hp", "drat"), p_value = 0.00001)
 #' explore_bivariate(mtcars, names(mtcars)[1], names(mtcars)[-1])
-explore_bivariate <- function(data, dependent, independent, p_value = 0.05, type = "graph") {
+#' explore_bivariate(titanic::titanic_train, "Survived", c("Sex", "Age"), model_type = "logit")
+explore_bivariate <- function(data, dependent, independent, p_value = 0.05, type = "graph",
+                              model_type = "ols") {
 
   # getting the names of all the variables
   variables <- colnames(data)
@@ -36,12 +39,17 @@ explore_bivariate <- function(data, dependent, independent, p_value = 0.05, type
   # setting the iv list
   iv_list <- independent_text
 
+  # determining whether ols or logit
+  modelType <- ifelse(tolower(model_type) == "ols", "gaussian",
+                      ifelse(tolower(model_type) == "logit", "binomial",
+                             "please select either 'ols' or 'logit'"))
 
   # running the models
   models <- lapply(iv_list, function(x) {
     broom::tidy(glm(substitute(dv ~ i, list(dv = as.name(dependent_text),
                                             i = as.name(x))),
-                    data = data))
+                    data = data,
+                    family = modelType))
   })
 
 
@@ -54,19 +62,19 @@ explore_bivariate <- function(data, dependent, independent, p_value = 0.05, type
       dplyr::filter(term != "(Intercept)") %>%
       dplyr::select(model_number, term, estimate, std.error) %>%
       dplyr::mutate(lower = (estimate - (std.error * 1.96)),
-             upper = (estimate + (std.error * 1.96)),
-             term = forcats::fct_reorder(term, estimate),
-             significance = ifelse(estimate > 0 & lower > 0, "positive",
-                                   ifelse(estimate < 0 & upper < 0, "negative", "not significant"))) %>%
+                    upper = (estimate + (std.error * 1.96)),
+                    term = forcats::fct_reorder(term, estimate),
+                    significance = ifelse(estimate > 0 & lower > 0, "positive",
+                                          ifelse(estimate < 0 & upper < 0, "negative", "not significant"))) %>%
       ggplot2::ggplot(ggplot2::aes(x = term, y = estimate,
-                 ymin = lower, ymax = upper, color = significance)) +
+                                   ymin = lower, ymax = upper, color = significance)) +
       ggplot2::theme_minimal() +
       ggplot2::geom_hline(yintercept = 0.0, color = "red", lty = 2) +
       ggplot2::geom_point() +
       ggplot2::geom_linerange() +
       ggplot2::labs(title = "Results are from bivariate tests, not a single model.",
-           caption = "Graph results show a 95% confidence interval",
-           x = "", y = "Coefficient") +
+                    caption = "Graph results show a 95% confidence interval",
+                    x = "", y = "Coefficient") +
       ggplot2::coord_flip() +
       ggplot2::scale_color_manual(values = c("red2", "gray", "#7CAE00"))
 
@@ -85,5 +93,4 @@ explore_bivariate <- function(data, dependent, independent, p_value = 0.05, type
     return("Please select either 'graph' or 'table' for type")
   }
 }
-
 
