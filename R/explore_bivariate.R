@@ -17,11 +17,8 @@
 #' @export
 #'
 #' @examples
-#' explore_bivariate(gapminder::gapminder, "lifeExp", c("gdpPercap", "continent"), type = "table")
-#' explore_bivariate(gapminder::gapminder, "lifeExp", c("gdpPercap", "continent"))
 #' explore_bivariate(mtcars, "mpg", c("cyl", "disp", "hp", "drat"), p_value = 0.00001)
 #' explore_bivariate(mtcars, names(mtcars)[1], names(mtcars)[-1])
-#' explore_bivariate(titanic::titanic_train, "Survived", c("Sex", "Age"), model_type = "logit")
 explore_bivariate <- function(data, dependent, independent, p_value = 0.05, type = "graph",
                               model_type = "ols") {
 

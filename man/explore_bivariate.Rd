@@ -27,9 +27,6 @@ The results are helpful when trying to first gain an understanding of relationsh
 a large number of variables.
 }
 \examples{
-explore_bivariate(gapminder::gapminder, "lifeExp", c("gdpPercap", "continent"), type = "table")
-explore_bivariate(gapminder::gapminder, "lifeExp", c("gdpPercap", "continent"))
 explore_bivariate(mtcars, "mpg", c("cyl", "disp", "hp", "drat"), p_value = 0.00001)
 explore_bivariate(mtcars, names(mtcars)[1], names(mtcars)[-1])
-explore_bivariate(titanic::titanic_train, "Survived", c("Sex", "Age"), model_type = "logit")
 }

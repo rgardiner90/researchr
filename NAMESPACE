@@ -2,5 +2,10 @@
 
 export(check_assumptions)
 export(check_missing_variables)
+export(create_predictions)
 export(explore_bivariate)
+importFrom(dplyr,quos)
+importFrom(dplyr,select)
 importFrom(magrittr,"%>%")
+importFrom(modelr,add_predictions)
+importFrom(modelr,data_grid)
