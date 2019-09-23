@@ -20,3 +20,8 @@ values of the predictor variable}
 This function returns a data frame of predictions using simulated data.
 This result only works on OLS or logit models.
 }
+\examples{
+model <- lm(mpg ~ ., data = mtcars)
+create_predictions(model, mtcars, cyl, wt)
+create_predictions(model, mtcars, gear)
+}
