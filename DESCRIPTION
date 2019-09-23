@@ -20,7 +20,11 @@ Imports:
    magrittr,
    car (>= 3.0-3),
    moments (>= 0.14),
-   modelr
+   modelr,
+   broom,
+   forcats,
+   tibble,
+   tidyr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
