@@ -55,9 +55,9 @@ explore_bivariate <- function(data, dependent, independent, p_value = 0.05, type
 
     results <- models %>%
       tibble::tibble() %>%
-      tidyr::unnest(.id = "model_number") %>%
+      tidyr::unnest(cols = c(.)) %>%
       dplyr::filter(term != "(Intercept)") %>%
-      dplyr::select(model_number, term, estimate, std.error) %>%
+      dplyr::select(term, estimate, std.error) %>%
       dplyr::mutate(lower = (estimate - (std.error * 1.96)),
                     upper = (estimate + (std.error * 1.96)),
                     term = forcats::fct_reorder(term, estimate),
@@ -81,7 +81,7 @@ explore_bivariate <- function(data, dependent, independent, p_value = 0.05, type
 
     results <- models %>%
       tibble::tibble() %>%
-      tidyr::unnest(.id = "model_number") %>%
+      tidyr::unnest(cols =c(.)) %>%
       dplyr::filter(term != "(Intercept)") %>%
       dplyr::mutate(significance = ifelse(p.value < p_value, 1, 0))
 
