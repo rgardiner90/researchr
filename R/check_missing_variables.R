@@ -32,7 +32,7 @@ check_missing_variables <- function(dataset) {
     return("Yay! You have no missing data")
   } else {
     variable_missing_data %>%
-      dplyr::mutate(proportion_missing = num_rows_NA / nrow(missing),
+      dplyr::mutate(proportion_missing = num_rows_NA / nrow(dataset),
                     percent_missing = (proportion_missing * 100),
                     missing = paste(V1, "Missing \nObservations")) %>%
       dplyr::arrange(desc(percent_missing)) %>%
