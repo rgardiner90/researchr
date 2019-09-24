@@ -27,9 +27,23 @@ check_missing_variables <- function(dataset) {
 
   variable_missing_data$num_rows_NA <- as.numeric(as.character(variable_missing_data$V1))
 
+  number_of_variables <- variable_missing_data[variable_missing_data$V1 != 0, ]
 
   if(all(variable_missing_data[, 1] == 0)) {
     return("Yay! You have no missing data")
+  } else if(nrow(number_of_variables) > 10) {
+    variable_missing_data %>%
+      dplyr::mutate(proportion_missing = num_rows_NA / nrow(dataset),
+                    percent_missing = (proportion_missing * 100)) %>%
+      dplyr::arrange(desc(percent_missing)) %>%
+      dplyr::filter(percent_missing != 0) %>%
+      dplyr::mutate(columns = reorder(columns, percent_missing)) %>%
+      ggplot2::ggplot(ggplot2::aes(factor(columns), percent_missing, fill = percent_missing)) +
+      ggplot2::geom_col()  +
+      ggplot2::labs(x = "Original Variables", y ="Percentage of Observations that are Missing",
+                    fill = "Percent Missing") +
+      ggplot2::coord_flip() +
+      ggplot2::scale_fill_gradient2(limits = c(0, 100), low = "light blue", high = "dark red", mid = "light blue")
   } else {
     variable_missing_data %>%
       dplyr::mutate(proportion_missing = num_rows_NA / nrow(dataset),
