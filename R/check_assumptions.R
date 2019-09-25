@@ -56,9 +56,9 @@ check_assumptions <- function(model_name) {
   # adding multicollinearity
   ####
   viffy <- ifelse(length(model_name$coefficients) < 3,
-                  "only one IV", max(car::vif(model_name)))
+                  "only one IV", max(round(car::vif(model_name), 3)))
 
-  viffy_results <- ifelse(viffy == "only one IV", "NA",
+  viffy_results <- ifelse(viffy == "only one IV", NA,
                           ifelse(viffy > 10, "problem",
                                  ifelse(viffy > 4, "potential problem", "no problem")))
 
@@ -68,8 +68,6 @@ check_assumptions <- function(model_name) {
   ####
   # adding conditional mean of the errors
   ####
-  resid <- residuals(model_name)
-
 
   # running correlation between variables and residual (conditional mean of error is zero)
   correlation <- sapply(model_name$model,
@@ -77,8 +75,12 @@ check_assumptions <- function(model_name) {
                                            max(abs(tapply(resid, x, mean))),
                                            cor(resid, x)))
 
+  if(any(unique(model_name$model) < 10)) {
+    warning('You may have a factor variable. If so, correlation is not appropriate.')
+  }
+
   cor_problem <- ifelse(correlation > 0.2,
-                        "potential problem, unkown if factor", "no problem, unknown if factor")
+                        "potential problem", "no problem")
 
   cor_output <-cbind(paste0("conditional mean: ",
                             variable.names(model_name)), signif(correlation, 3), cor_problem)
