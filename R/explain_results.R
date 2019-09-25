@@ -4,7 +4,8 @@
 #' the influence of the independent variable on the dependent variable.
 #'
 #' @param model_name The oLS model created
-#' @param variable The independent variable you want explained
+#' @param variable The variable (aka term) used in the model. Needs to be exactly how tidy() would
+#' name the variable.
 #' @param p_value The significance threshold used to determine significance
 #'
 #' @importFrom magrittr %>%

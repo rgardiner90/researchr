@@ -4,12 +4,15 @@
 \alias{explain_results}
 \title{Explaining Results for OLS models}
 \usage{
-explain_results(model_name, variable)
+explain_results(model_name, variable, p_value = 0.05)
 }
 \arguments{
 \item{model_name}{The oLS model created}
 
-\item{variable}{The independent variable you want explained}
+\item{variable}{The variable (aka term) used in the model. Needs to be exactly how tidy() would
+name the variable.}
+
+\item{p_value}{The significance threshold used to determine significance}
 }
 \description{
 This function returns a string for a specific variable that explains in simple terms
@@ -19,5 +22,5 @@ the influence of the independent variable on the dependent variable.
 model1 <- lm(mpg ~ wt, data = mtcars)
 model2 <- lm(mpg ~ wt + cyl + hp + wt + disp, data = mtcars)
 explain_results(model1, "wt")
-explain_results(model2, "cyl")
+explain_results(model2, "cyl", p_value = 0.1)
 }
