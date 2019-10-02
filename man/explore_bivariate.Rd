@@ -4,8 +4,8 @@
 \alias{explore_bivariate}
 \title{Exploring biviate regression results of a dataframe}
 \usage{
-explore_bivariate(data, dependent, independent, p_value = 0.05,
-  type = "graph", model_type = "ols")
+explore_bivariate(data, dependent, independent, control = FALSE,
+  p_value = 0.05, type = "graph", model_type = "ols")
 }
 \arguments{
 \item{data}{A matrix, data frame, or tibble.}
@@ -14,12 +14,14 @@ explore_bivariate(data, dependent, independent, p_value = 0.05,
 
 \item{independent}{A string vector of the different independent variables to test}
 
+\item{control}{A string character of one control variable that can be used}
+
 \item{p_value}{The significance threshold for a table output (defaults to 0.05). Graph is
 fixed at 95 percent confidence intervals}
 
 \item{type}{Specifies the type of output request.  either 'graph' or 'table'}
 
-\item{model_type}{Specificies whether you have an OLS or logit model.}
+\item{model_type}{Specificies whether you have an OLS or logit model}
 }
 \description{
 This function returns either a graph or table of bivariate regression results for a dataset.
@@ -27,6 +29,6 @@ The results are helpful when trying to first gain an understanding of relationsh
 a large number of variables.
 }
 \examples{
-explore_bivariate(mtcars, "mpg", c("cyl", "disp", "hp", "drat"), p_value = 0.00001)
+explore_bivariate(data = mtcars, dependent = "mpg", independent = c("cyl", "disp", "hp", "drat"), control = "gear", p_value = 0.05, type = "table")
 explore_bivariate(mtcars, names(mtcars)[1], names(mtcars)[-1])
 }
